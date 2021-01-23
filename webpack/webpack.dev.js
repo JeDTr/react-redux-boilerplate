@@ -21,9 +21,9 @@ module.exports = merge(base, {
   devServer: {
     hot: true,
     compress: true,
-    open: true,
+    open: false,
     port: 3000,
-    historyApiFallback: true,
+    // historyApiFallback: true,
   },
 
   output: {
