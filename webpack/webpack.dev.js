@@ -23,7 +23,7 @@ module.exports = merge(base, {
     compress: true,
     open: false,
     port: 3000,
-    // historyApiFallback: true,
+    historyApiFallback: true, // for react router dom
   },
 
   output: {

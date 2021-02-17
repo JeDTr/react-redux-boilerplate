@@ -1,13 +1,18 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useAuthContext } from "../contexts/AuthContext";
+// import { useAuthContext } from "../contexts/AuthContext";
 
-const RouteAuth = (props) => {
-  const { user } = useAuthContext();
+import AuthLayout from "@/containers/AuthLayout";
 
-  if (!user.isAuthenticated) return <Redirect to="/login" />;
+const RouteAuth = ({ component: Component, ...rest }) => (
+  // const { user } = useAuthContext();
 
-  return <Route {...props} />;
-};
+  // if (!user.isAuthenticated) return <Redirect to="/login" />;
 
+  <Route {...rest}>
+    <AuthLayout>
+      <Component />
+    </AuthLayout>
+  </Route>
+);
 export default RouteAuth;

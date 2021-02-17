@@ -11,13 +11,14 @@ import theme from "@/styles/theme";
 import GlobalStyle from "@/styles/global-style";
 import store from "@/redux/store";
 import history from "@/utils/history";
-// import Routes from '@/routes';
+import Routes from "@/routes";
 
 const App = hot(() => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <ConnectedRouter history={history}>
-        <GlobalStyle />
+        <Routes />
       </ConnectedRouter>
     </ThemeProvider>
   </Provider>
