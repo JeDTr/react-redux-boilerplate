@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import List from "./List";
@@ -19,4 +19,4 @@ const PagePost = () => {
   );
 };
 
-export default PagePost;
+export default memo(PagePost);

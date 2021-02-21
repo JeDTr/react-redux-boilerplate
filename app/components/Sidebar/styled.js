@@ -17,9 +17,14 @@ export const Item = styled.button`
   font: inherit;
   text-decoration: none;
 
-  &:hover,
-  &.active {
+  &:hover {
     background-color: #81ecec;
+    color: #fff;
+  }
+
+  &.active {
+    background-color: #00cec9;
+    color: #fff;
   }
 
   ${({ $isChild }) =>
