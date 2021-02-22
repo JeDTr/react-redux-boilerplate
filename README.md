@@ -3,6 +3,7 @@
 - [ ] webpack
 - [x] babel
 - [ ] eslint
-- [ ] redux
-- [ ] api service
-- [ ] authentication
+- [x] redux
+- [x] api service
+- [x] authentication
+- [ ] jest
