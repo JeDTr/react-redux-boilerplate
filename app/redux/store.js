@@ -10,6 +10,7 @@ import createSagaMiddleware from "redux-saga";
 import history from "@/utils/history";
 
 import createReducer from "./reducers";
+import globalSaga from "./global/saga";
 
 export function configureStore(initialState = {}) {
   let composeEnhancers = compose;
@@ -52,6 +53,8 @@ export function configureStore(initialState = {}) {
     initialState,
     composeEnhancers(...enhancers),
   );
+
+  runSaga(globalSaga);
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */

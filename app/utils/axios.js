@@ -1,10 +1,14 @@
 // original version: https://gist.github.com/Godofbrowser/bf118322301af3fc334437c683887c5f
 import axiosBase from "axios";
 
+import { getTokens, setTokens } from "@/utils/auth";
+
 const axios = axiosBase.create({
   baseURL: "http://localhost:5000/api",
   timeout: 10000,
 });
+
+axios.defaults.headers.access_token = getTokens().access_token;
 
 // for multiple requests
 let isRefreshing = false;
@@ -44,16 +48,12 @@ axios.interceptors.response.use(
       originalRequest._retry = true;
       isRefreshing = true;
 
-      // const refreshToken = window.localStorage.getItem("refreshToken");
-      const refresh_token = "refresh_tokens";
+      const { refresh_token } = getTokens();
       return new Promise((resolve, reject) => {
         axios
           .post("/refresh_token", { refresh_token })
           .then(({ data }) => {
-            // window.localStorage.setItem("token", data.token);
-            // window.localStorage.setItem("refreshToken", data.refreshToken);
-            // axios.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-            // originalRequest.headers.Authorization = `Bearer ${data.token}`;
+            setTokens(data);
             axios.defaults.headers.access_token = data.access_token;
             originalRequest.headers.access_token = data.access_token;
             processQueue(null, data.access_token);

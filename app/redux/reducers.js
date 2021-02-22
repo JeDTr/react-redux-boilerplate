@@ -4,7 +4,6 @@
 
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
-import produce from "immer";
 
 import history from "@/utils/history";
 // import languageProviderReducer from "containers/LanguageProvider/reducer";
@@ -24,5 +23,3 @@ export default function createReducer(injectedReducers = {}) {
 
   return rootReducer;
 }
-
-window.produce = produce;

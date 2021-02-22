@@ -29,7 +29,9 @@ const refreshTokens = () => {
   return tokens
 }
 
-const isTokenExpired = token => parseInt(token.split('_').pop()) < Date.now()
+const isTokenExpired = token => {
+  return parseInt(token.split('_').pop()) < (Date.now() - 10000)
+}
 
 const user = {
   email: "tvthong1995@gmail.com",

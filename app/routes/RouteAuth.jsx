@@ -1,18 +1,20 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-// import { useAuthContext } from "../contexts/AuthContext";
+import { useSelector } from "react-redux";
 
 import AuthLayout from "@/containers/AuthLayout";
 
-const RouteAuth = ({ component: Component, ...rest }) => (
-  // const { user } = useAuthContext();
+const RouteAuth = ({ component: Component, ...rest }) => {
+  const currentUser = useSelector((state) => state.global.currentUser);
 
-  // if (!user.isAuthenticated) return <Redirect to="/login" />;
+  if (!currentUser) return <Redirect to="/login" />;
 
-  <Route {...rest}>
-    <AuthLayout>
-      <Component />
-    </AuthLayout>
-  </Route>
-);
+  return (
+    <Route {...rest}>
+      <AuthLayout>
+        <Component />
+      </AuthLayout>
+    </Route>
+  );
+};
 export default RouteAuth;
