@@ -1,9 +1,9 @@
 ## Check list
 
-- [ ] webpack
+- [x] webpack
 - [x] babel
-- [ ] eslint
+- [x] eslint
 - [x] redux
 - [x] api service
 - [x] authentication
-- [ ] jest
+- [x] jest

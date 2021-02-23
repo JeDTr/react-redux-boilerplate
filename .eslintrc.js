@@ -13,7 +13,7 @@ module.exports = {
     // jest: true,
     browser: true,
     node: true,
-    es2020 : true,
+    es2020: true,
   },
   parserOptions: {
     ecmaVersion: 2020,
@@ -26,6 +26,18 @@ module.exports = {
     "prettier/prettier": ["error", prettierOptions],
     "arrow-body-style": [2, "as-needed"],
     "class-methods-use-this": 0,
+    // "max-len": 0,
+    // "newline-per-chained-call": 0,
+    // "no-confusing-arrow": 0,
+    "no-console": 1,
+    "no-unused-vars": 2,
+    "no-use-before-define": 0,
+    "prefer-template": 2,
+    "no-param-reassign": [
+      "error",
+      { props: true, ignorePropertyModificationsFor: ["draft"] },
+    ],
+    camelcase: 0,
     "import/imports-first": 0,
     "import/newline-after-import": 0,
     "import/no-dynamic-require": 0,
@@ -33,6 +45,20 @@ module.exports = {
     "import/no-unresolved": 2,
     "import/no-webpack-loader-syntax": 0,
     "import/prefer-default-export": 0,
+    "import/order": [
+      "error",
+      {
+        group: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+        ],
+        "newlines-between": "always",
+      },
+    ],
     indent: [
       2,
       2,
@@ -55,15 +81,6 @@ module.exports = {
     "jsx-a11y/mouse-events-have-key-events": 2,
     "jsx-a11y/role-has-required-aria-props": 2,
     "jsx-a11y/role-supports-aria-props": 2,
-    "max-len": 0,
-    "newline-per-chained-call": 0,
-    "no-confusing-arrow": 0,
-    "no-console": 1,
-    "no-unused-vars": 2,
-    "no-use-before-define": 0,
-    "prefer-template": 2,
-    "no-param-reassign": ["error", { "props": true, ignorePropertyModificationsFor: ["draft"]}],
-    "camelcase": 0,
     "react/destructuring-assignment": 0,
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-closing-tag-location": 0,
@@ -84,7 +101,7 @@ module.exports = {
   settings: {
     "import/resolver": {
       webpack: {
-        config: 'webpack/webpack.base.js',
+        config: "webpack/webpack.base.js",
         // config: {
         //   resolve: {
         //     modules: ["node_modules"],
