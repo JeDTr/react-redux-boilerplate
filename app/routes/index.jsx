@@ -1,44 +1,28 @@
-import React, { Suspense, useEffect } from "react";
-import { Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Suspense } from "react";
+import { BrowserRouter, Switch } from "react-router-dom";
+import { useQuery } from "react-query";
 
-import { getTokens } from "@/utils/auth";
-import { getUserProfile } from "@/redux/global/actions";
+import AuthService from "@/services/api/auth-service";
 
 import { ROUTES } from "./constants";
 
 const AppRoutes = () => {
-  const dispatch = useDispatch();
-  const { loading, key } = useSelector((state) => state.global);
+  const { isLoading } = useQuery("profile", () => {
+    return AuthService.getProfile();
+  });
 
-  useEffect(() => {
-    const { access_token } = getTokens();
-
-    if (access_token) {
-      dispatch(getUserProfile.request());
-    }
-  }, [key]);
-
-  // useEffect(() => {
-  //   const handleStorageChange = (e) => {
-  //     console.log(e.key);
-  //   };
-
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => window.removeEventListener("storage", handleStorageChange);
-  // }, []);
-
-  if (loading) return "Loading...";
+  if (isLoading) return "Loading...";
 
   return (
-    <Suspense fallback={null}>
-      <Switch>
-        {ROUTES.map(({ routeComponent: RouteComponent, path, ...rest }) => (
-          <RouteComponent path={path} key={path} {...rest} />
-        ))}
-      </Switch>
-    </Suspense>
+    <BrowserRouter>
+      <Suspense fallback={null}>
+        <Switch>
+          {ROUTES.map(({ routeComponent: RouteComponent, path, ...rest }) => (
+            <RouteComponent path={path} key={path} {...rest} />
+          ))}
+        </Switch>
+      </Suspense>
+    </BrowserRouter>
   );
 };
 

@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useQueryClient } from "react-query";
 
 import AuthLayout from "@/containers/AuthLayout";
 
 const RouteAuth = ({ component: Component, ...rest }) => {
-  const currentUser = useSelector((state) => state.global.currentUser);
+  const queryClient = useQueryClient();
+  const profile = queryClient.getQueryData("profile");
 
-  if (!currentUser) return <Redirect to="/login" />;
+  if (!profile) return <Redirect to="/login" />;
 
   return (
     <Route {...rest}>

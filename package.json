@@ -27,6 +27,7 @@
     "react-hook-form": "^6.15.2",
     "react-hot-loader": "^4.13.0",
     "react-modal": "^3.12.1",
+    "react-query": "^3.12.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.1.0",

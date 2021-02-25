@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useQueryClient } from "react-query";
 
 const RouteUnauth = (props) => {
-  const currentUser = useSelector((state) => state.global.currentUser);
+  const queryClient = useQueryClient();
+  const profile = queryClient.getQueryData("profile");
 
-  if (currentUser) return <Redirect to="/" />;
+  if (profile) return <Redirect to="/" />;
 
   return <Route {...props} />;
 };
