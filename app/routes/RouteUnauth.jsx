@@ -1,14 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useQueryClient } from "react-query";
+import { observer } from "mobx-react-lite";
+
+import { useStores } from "@/mobx/context";
 
 const RouteUnauth = (props) => {
-  const queryClient = useQueryClient();
-  const profile = queryClient.getQueryData("profile");
+  const { authStore } = useStores();
 
-  if (profile) return <Redirect to="/" />;
+  if (authStore.profile) return <Redirect to="/" />;
 
   return <Route {...props} />;
 };
 
-export default RouteUnauth;
+export default observer(RouteUnauth);

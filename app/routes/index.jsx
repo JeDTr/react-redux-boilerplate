@@ -1,17 +1,19 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
-import { useQuery } from "react-query";
+import { observer } from "mobx-react-lite";
 
-import AuthService from "@/services/api/auth-service";
+import { useStores } from "@/mobx/context";
 
 import { ROUTES } from "./constants";
 
 const AppRoutes = () => {
-  const { isLoading } = useQuery("profile", () => {
-    return AuthService.getProfile();
-  });
+  const { authStore } = useStores();
 
-  if (isLoading) return "Loading...";
+  useEffect(() => {
+    authStore.fetchProfile();
+  }, []);
+
+  if (authStore.isLoading) return "Loading...";
 
   return (
     <BrowserRouter>
@@ -26,4 +28,4 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes;
+export default observer(AppRoutes);

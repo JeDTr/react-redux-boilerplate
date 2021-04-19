@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useQueryClient } from "react-query";
+import { observer } from "mobx-react-lite";
 
 import AuthLayout from "@/containers/AuthLayout";
+import { useStores } from "@/mobx/context";
 
 const RouteAuth = ({ component: Component, ...rest }) => {
-  const queryClient = useQueryClient();
-  const profile = queryClient.getQueryData("profile");
+  const { authStore } = useStores();
 
-  if (!profile) return <Redirect to="/login" />;
+  if (!authStore.profile) return <Redirect to="/login" />;
 
   return (
     <Route {...rest}>
@@ -18,4 +18,4 @@ const RouteAuth = ({ component: Component, ...rest }) => {
     </Route>
   );
 };
-export default RouteAuth;
+export default observer(RouteAuth);
