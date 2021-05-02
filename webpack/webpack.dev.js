@@ -9,15 +9,8 @@ module.exports = merge(base, {
   mode: "development",
   entry: [
     "react-hot-loader/patch",
-    // 'webpack-hot-middleware/client?reload=true',
     appPath, // Start with js/app.js
   ],
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //   },
-  // },
-
   devServer: {
     hot: true,
     compress: true,
@@ -28,8 +21,6 @@ module.exports = merge(base, {
 
   output: {
     publicPath: "/",
-    // filename: '[name].js',
-    // chunkFilename: '[name].chunk.js',
   },
 
   plugins: [
@@ -48,8 +39,4 @@ module.exports = merge(base, {
   // Emit a source map for easier debugging
   // See https://webpack.js.org/configuration/devtool/#devtool
   devtool: "eval-source-map",
-
-  // performance: {
-  //   hints: false,
-  // },
 });

@@ -10,7 +10,7 @@ module.exports = {
   extends: ["airbnb", "prettier", "prettier/react"],
   plugins: ["prettier", "react", "react-hooks", "jsx-a11y"],
   env: {
-    // jest: true,
+    jest: true,
     browser: true,
     node: true,
     es2020: true,
@@ -26,9 +26,6 @@ module.exports = {
     "prettier/prettier": ["error", prettierOptions],
     "arrow-body-style": [2, "as-needed"],
     "class-methods-use-this": 0,
-    // "max-len": 0,
-    // "newline-per-chained-call": 0,
-    // "no-confusing-arrow": 0,
     "no-console": 1,
     "no-unused-vars": 2,
     "no-use-before-define": 0,
@@ -84,7 +81,6 @@ module.exports = {
     "react/destructuring-assignment": 0,
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-closing-tag-location": 0,
-    // "react/forbid-prop-types": 0,
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
@@ -92,26 +88,13 @@ module.exports = {
     "react/jsx-uses-vars": 2,
     "react/require-default-props": 0,
     "react/require-extension": 0,
-    // "react/self-closing-comp": 0,
     "react/sort-comp": 0,
     "react/prop-types": 0,
-    // "require-yield": 0,
-    // "prefer-spread": 1,
   },
   settings: {
     "import/resolver": {
       webpack: {
         config: "webpack/webpack.base.js",
-        // config: {
-        //   resolve: {
-        //     modules: ["node_modules"],
-        //     extensions: [".js", ".jsx"],
-        //     alias: {
-        //       // "react-dom": "@hot-loader/react-dom",
-        //       "@": path.join(__dirname, "app"),
-        //     },
-        //   },
-        // },
       },
     },
   },
