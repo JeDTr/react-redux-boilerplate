@@ -48,7 +48,7 @@ module.exports = {
     "import/order": [
       "error",
       {
-        group: [
+        groups: [
           "builtin",
           "external",
           "internal",
