@@ -16,4 +16,8 @@ export const Button = styled.button`
         `;
     }
   }}
+
+  &:hover {
+    box-shadow: 0 0 0 100px rgba(0, 0, 0, 0.3);
+  }
 `;

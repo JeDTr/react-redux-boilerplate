@@ -30,7 +30,11 @@ const Login = () => {
   return (
     <S.Wrapper>
       <S.FormWrapper>
-        <Form onSubmit={handleSubmit} errors={error}>
+        <Form
+          onSubmit={handleSubmit}
+          errors={error}
+          enableLeavingPrompt={false}
+        >
           <Form.Group>
             <Form.Label htmlFor="email">Email (*)</Form.Label>
             <Form.Field type="text" name="email" id="email" />

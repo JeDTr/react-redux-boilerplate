@@ -1,8 +1,17 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+// eslint-disable-next-line import/no-extraneous-dependencies
 
-const Form = ({ onSubmit, errors, ...rest }) => {
-  const methods = useForm();
+import Prompt from "@/components/Prompt";
+
+const Form = ({
+  enableLeavingPrompt = true,
+  onSubmit,
+  errors,
+  defaultValues,
+  ...rest
+}) => {
+  const methods = useForm({ defaultValues });
   const { handleSubmit, setError } = methods;
 
   useEffect(() => {
@@ -17,9 +26,12 @@ const Form = ({ onSubmit, errors, ...rest }) => {
   }, [errors]);
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)} {...rest} />
-    </FormProvider>
+    <>
+      <FormProvider {...methods}>
+        {enableLeavingPrompt && <Prompt />}
+        <form onSubmit={handleSubmit(onSubmit)} {...rest} />
+      </FormProvider>
+    </>
   );
 };
 

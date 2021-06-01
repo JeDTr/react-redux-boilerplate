@@ -1,12 +1,11 @@
 import { lazy } from "react";
 
-// import Posts from "@/pages/Posts";
 import RouteAuth from "./RouteAuth";
 import RouteUnauth from "./RouteUnauth";
 
-const Home = lazy(() => import("@/containers/PageHome"));
-const Login = lazy(() => import("@/containers/PageLogin"));
-const Posts = lazy(() => import("@/containers/PagePost"));
+const Home = lazy(() => import("@/containers/pages/Home"));
+const Login = lazy(() => import("@/containers/pages/Login"));
+const Posts = lazy(() => import("@/containers/pages/Post"));
 
 export const ROUTES = [
   {

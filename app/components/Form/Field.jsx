@@ -2,11 +2,14 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import Input from "../Input";
+import Textarea from "../Textarea";
 
 import Feedback from "./Feedback";
 
 const Control = ({ type = "text", register, ...rest }) => {
   switch (type) {
+    case "textarea":
+      return <Textarea ref={register} {...rest} />;
     default:
       return <Input type={type} ref={register} {...rest} />;
   }
