@@ -160,6 +160,8 @@ const base = css`
   }
   button {
     cursor: pointer;
+    border: 0;
+    outline: 0;
   }
 `;
 
