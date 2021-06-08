@@ -11,8 +11,8 @@ const Form = ({
   defaultValues,
   ...rest
 }) => {
-  const methods = useForm({ defaultValues });
-  const { handleSubmit, setError } = methods;
+  const formBag = useForm({ defaultValues });
+  const { handleSubmit, setError } = formBag;
 
   useEffect(() => {
     if (errors) {
@@ -27,7 +27,7 @@ const Form = ({
 
   return (
     <>
-      <FormProvider {...methods}>
+      <FormProvider {...formBag}>
         {enableLeavingPrompt && <Prompt />}
         <form onSubmit={handleSubmit(onSubmit)} {...rest} />
       </FormProvider>

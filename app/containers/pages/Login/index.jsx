@@ -34,6 +34,10 @@ const Login = () => {
           onSubmit={handleSubmit}
           errors={error}
           enableLeavingPrompt={false}
+          defaultValues={{
+            email: "",
+            password: "",
+          }}
         >
           <Form.Group>
             <Form.Label htmlFor="email">Email (*)</Form.Label>

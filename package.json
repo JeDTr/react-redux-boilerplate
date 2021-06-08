@@ -46,6 +46,7 @@
     "@babel/eslint-parser": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@svgr/webpack": "^5.5.0",
     "babel-loader": "^8.2.2",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",

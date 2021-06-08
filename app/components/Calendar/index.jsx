@@ -2,11 +2,11 @@ import React, { useState, createContext, useContext } from "react";
 import dayjs from "dayjs";
 import _range from "lodash-es/range";
 
+import { dateFormats } from "@/constants";
+
 import * as S from "./styled";
 
 const weekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-
-const defaultFormatDate = "YYYY/MM/DD";
 
 const CalendarContext = createContext();
 
@@ -15,11 +15,17 @@ const isValidDate = (date, format) => dayjs(date).format(format) === date;
 const DateCell = ({ data, ...rest }) => {
   const { value, onChange } = useContext(CalendarContext);
 
+  const handleClick = () => {
+    if (data) {
+      onChange(data.format(dateFormats.DATE_SLASH));
+    }
+  };
+
   return (
     <S.DayCell>
       <S.DayCellInner
         isSelected={data && data.isSame(value, "date")}
-        onClick={() => data && onChange(data.format(defaultFormatDate))}
+        onClick={handleClick}
         {...rest}
       />
     </S.DayCell>
@@ -105,7 +111,7 @@ const DayList = ({ todayObj, dateObj }) => {
 const Calendar = ({ className, value, onChange }) => {
   const todayObj = dayjs();
   const [dateObj, setDateObj] = useState(() =>
-    isValidDate(value, defaultFormatDate) ? dayjs(value) : todayObj,
+    isValidDate(value, dateFormats.DATE_SLASH) ? dayjs(value) : todayObj,
   );
 
   const handlePrevClick = () => {
@@ -126,7 +132,7 @@ const Calendar = ({ className, value, onChange }) => {
           >
             &lt; Prev
           </S.NavButton>
-          <S.MonthYear>{dateObj.format(defaultFormatDate)}</S.MonthYear>
+          <S.MonthYear>{dateObj.format(dateFormats.DATE_SLASH)}</S.MonthYear>
           <S.NavButton onClick={handleNextClick}>Next &gt;</S.NavButton>
         </S.Nav>
         <S.WeekDayContainer>

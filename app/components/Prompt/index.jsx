@@ -25,12 +25,16 @@ const Prompt = () => {
   };
 
   useEffect(() => {
+    let unblock;
+
     if (isDirty) {
-      const unblock = history.block((location) => {
+      unblock = history.block((location) => {
         setPrompt({ location, unblock });
         return false;
       });
     }
+
+    return unblock;
   }, [isDirty]);
 
   useEffect(() => {
