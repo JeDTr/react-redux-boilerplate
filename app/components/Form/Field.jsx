@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import Input from "../Input";
 import Textarea from "../Textarea";
@@ -8,9 +8,7 @@ import Datepicker from "../Datepicker";
 import Feedback from "./Feedback";
 
 const Control = ({ type = "text", register, name, ...rest }) => {
-  const { control, setValue } = useFormContext();
-
-  const value = useWatch({ control, name });
+  const { setValue, watch } = useFormContext();
 
   const handleChange = (newValue) => {
     setValue(name, newValue);
@@ -22,7 +20,6 @@ const Control = ({ type = "text", register, name, ...rest }) => {
         <Textarea
           ref={register}
           name={name}
-          // value={value}
           onChange={handleChange}
           {...rest}
         />
@@ -32,7 +29,7 @@ const Control = ({ type = "text", register, name, ...rest }) => {
         <Datepicker
           ref={register}
           name={name}
-          value={value}
+          value={watch(name)}
           onChange={handleChange}
           {...rest}
         />
@@ -43,7 +40,6 @@ const Control = ({ type = "text", register, name, ...rest }) => {
           type={type}
           ref={register}
           name={name}
-          // value={value}
           onChange={handleChange}
           {...rest}
         />
