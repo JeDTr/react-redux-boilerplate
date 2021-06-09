@@ -31,6 +31,10 @@ const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
     setOpen(!isOpen);
   };
 
+  const handleFocus = () => {
+    setOpen(true);
+  };
+
   const handleBlur = (e) => {
     if (onBlur) onBlur(e);
 
@@ -60,6 +64,7 @@ const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
         placeholder={dateFormats.DATE_SLASH}
         onChange={handleInputChange}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         {...rest}
       />
       <IconCalendar onClick={handleTogglePicker} />
