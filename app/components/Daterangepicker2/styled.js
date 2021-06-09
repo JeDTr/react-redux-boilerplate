@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  display: flex;
   position: relative;
 
   input {
@@ -20,4 +21,8 @@ export const CalendarWrapper = styled.div`
   top: 100%;
   left: 0;
   z-index: 10;
+`;
+
+export const InputWrapper = styled.div`
+  position: relative;
 `;

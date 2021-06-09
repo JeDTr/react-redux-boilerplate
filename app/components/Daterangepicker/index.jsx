@@ -2,11 +2,11 @@ import React, { useState, useRef } from "react";
 import dayjs from "dayjs";
 
 import Input from "@/components/Input";
-import Calendar from "@/components/Calendar";
 import { dateFormats } from "@/constants";
 import { ReactComponent as IconCalendar } from "@/assets/images/icon-calendar.svg";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 
+import Calendar from "./Calendar";
 import * as S from "./styled";
 
 const checkIsValidDate = (date) => {
@@ -25,12 +25,13 @@ const getValidDate = (date) => {
     return date;
   }
 
-  return dayjs().format(dateFormats.DATE_SLASH);
+  return null;
 };
 
-const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
+const Daterangepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
   const [isOpen, setOpen] = useState(false);
   const wrapperRef = useRef();
+  const [startDate, endDate] = (value || "").split("~");
 
   const handleTogglePicker = () => {
     setOpen(!isOpen);
@@ -44,8 +45,13 @@ const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
     if (onBlur) onBlur(e);
 
     if (onChange) {
-      if (checkIsValidDate(value)) {
-        onChange(dayjs(value).format("YYYY/MM/DD"));
+      if (checkIsValidDate(startDate) && checkIsValidDate(endDate)) {
+        onChange(
+          [
+            dayjs(startDate).format("YYYY/MM/DD"),
+            dayjs(endDate).format("YYYY/MM/DD"),
+          ].join("~"),
+        );
       } else {
         onChange("");
       }
@@ -56,8 +62,10 @@ const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
     if (onChange) onChange(newValue);
   };
 
-  const handleCalendarChange = (newValue) => {
-    if (onChange) onChange(newValue);
+  const handleCalendarChange = (newStartDate, newEndDate) => {
+    if (onChange) {
+      onChange([newStartDate, newEndDate].filter(Boolean).join("~"));
+    }
 
     setOpen(false);
   };
@@ -80,7 +88,8 @@ const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
       {isOpen && (
         <S.CalendarWrapper>
           <Calendar
-            value={getValidDate(value)}
+            startDate={getValidDate(startDate)}
+            endDate={getValidDate(endDate)}
             onChange={handleCalendarChange}
           />
         </S.CalendarWrapper>
@@ -89,4 +98,4 @@ const Datepicker = ({ value, onChange, onBlur, ...rest }, ref) => {
   );
 };
 
-export default React.forwardRef(Datepicker);
+export default React.forwardRef(Daterangepicker);

@@ -4,14 +4,28 @@ import { useFormContext } from "react-hook-form";
 import Input from "../Input";
 import Textarea from "../Textarea";
 import Datepicker from "../Datepicker";
+import Daterangepicker from "../Daterangepicker";
+import Daterangepicker2 from "../Daterangepicker2";
 
 import Feedback from "./Feedback";
 
-const Control = ({ type = "text", register, name, ...rest }) => {
+const Control = ({
+  type = "text",
+  register,
+  name,
+  startName,
+  endName,
+  ...rest
+}) => {
   const { setValue, watch } = useFormContext();
 
   const handleChange = (newValue) => {
     setValue(name, newValue);
+  };
+
+  const handleDaterangepickerChange = (newStartDate, newEndDate) => {
+    setValue(startName, newStartDate);
+    setValue(endName, newEndDate);
   };
 
   switch (type) {
@@ -31,6 +45,28 @@ const Control = ({ type = "text", register, name, ...rest }) => {
           name={name}
           value={watch(name)}
           onChange={handleChange}
+          {...rest}
+        />
+      );
+    case "daterangepicker":
+      return (
+        <Daterangepicker
+          ref={register}
+          name={name}
+          value={watch(name)}
+          onChange={handleChange}
+          {...rest}
+        />
+      );
+    case "daterangepicker2":
+      return (
+        <Daterangepicker2
+          ref={register}
+          startName={startName}
+          endName={endName}
+          startDate={watch(startName)}
+          endDate={watch(endName)}
+          onChange={handleDaterangepickerChange}
           {...rest}
         />
       );

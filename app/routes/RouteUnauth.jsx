@@ -6,7 +6,7 @@ const RouteUnauth = (props) => {
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData("profile");
 
-  if (profile) return <Redirect to="/" />;
+  if (profile) return <Redirect to="/posts/create" />;
 
   return <Route {...props} />;
 };
