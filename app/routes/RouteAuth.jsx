@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useQueryClient } from "react-query";
 
-import AuthLayout from "@/containers/AuthLayout";
+import AuthLayout from "@/containers/layouts/AuthLayout";
 
 const RouteAuth = ({ component: Component, ...rest }) => {
   const queryClient = useQueryClient();

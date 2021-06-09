@@ -22,7 +22,7 @@ const Control = ({ type = "text", register, name, ...rest }) => {
         <Textarea
           ref={register}
           name={name}
-          value={value}
+          // value={value}
           onChange={handleChange}
           {...rest}
         />
@@ -43,7 +43,7 @@ const Control = ({ type = "text", register, name, ...rest }) => {
           type={type}
           ref={register}
           name={name}
-          value={value}
+          // value={value}
           onChange={handleChange}
           {...rest}
         />
