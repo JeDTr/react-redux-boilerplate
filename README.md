@@ -7,3 +7,16 @@
 - [x] api service
 - [x] authentication
 - [x] jest
+
+## Start
+
+```
+yarn dev
+```
+
+- Account
+
+```
+email: "tvthong1995@gmail.com",
+password: "password",
+```
