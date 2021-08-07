@@ -7,9 +7,7 @@ import AuthService from "@/services/api/auth-service";
 import { ROUTES } from "./constants";
 
 const AppRoutes = () => {
-  const { isLoading } = useQuery("profile", () => {
-    return AuthService.getProfile();
-  });
+  const { isLoading } = useQuery("profile", () => AuthService.getProfile());
 
   if (isLoading) return "Loading...";
 

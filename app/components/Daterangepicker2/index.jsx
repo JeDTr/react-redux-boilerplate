@@ -28,10 +28,15 @@ const getValidDate = (date) => {
   return null;
 };
 
-const Daterangepicker = (
-  { startDate, endDate, onChange, onBlur, startName, endName, ...rest },
-  ref,
-) => {
+const Daterangepicker = ({
+  startDate,
+  endDate,
+  onChange,
+  onBlur,
+  startName,
+  endName,
+  ...rest
+}) => {
   const [isOpen, setOpen] = useState(false);
   const wrapperRef = useRef();
 
@@ -83,7 +88,6 @@ const Daterangepicker = (
       <S.InputWrapper>
         <Input
           value={startDate}
-          ref={ref}
           autoComplete="off"
           placeholder={dateFormats.DATE_SLASH}
           onChange={handleInputStartDateChange}
@@ -97,7 +101,6 @@ const Daterangepicker = (
       <S.InputWrapper>
         <Input
           value={endDate}
-          ref={ref}
           autoComplete="off"
           placeholder={dateFormats.DATE_SLASH}
           onChange={handleInputEndDateChange}
@@ -122,4 +125,4 @@ const Daterangepicker = (
   );
 };
 
-export default React.forwardRef(Daterangepicker);
+export default Daterangepicker;
