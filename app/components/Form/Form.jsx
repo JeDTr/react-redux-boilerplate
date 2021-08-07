@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-// eslint-disable-next-line import/no-extraneous-dependencies
 
 import Prompt from "@/components/Prompt";
 

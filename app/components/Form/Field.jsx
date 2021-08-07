@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller, useFormState } from "react-hook-form";
 
 import Input from "../Input";
 import Textarea from "../Textarea";
@@ -9,15 +9,8 @@ import Daterangepicker2 from "../Daterangepicker2";
 
 import Feedback from "./Feedback";
 
-const Control = ({
-  type = "text",
-  register,
-  name,
-  startName,
-  endName,
-  ...rest
-}) => {
-  const { setValue, watch } = useFormContext();
+const Control = ({ type = "text", name, startName, endName, ...rest }) => {
+  const { register, setValue, watch, control } = useFormContext();
 
   const handleChange = (newValue) => {
     setValue(name, newValue);
@@ -30,19 +23,11 @@ const Control = ({
 
   switch (type) {
     case "textarea":
-      return (
-        <Textarea
-          ref={register}
-          name={name}
-          onChange={handleChange}
-          {...rest}
-        />
-      );
+      return <Textarea {...register(name)} onChange={handleChange} {...rest} />;
     case "datepicker":
       return (
         <Datepicker
-          ref={register}
-          name={name}
+          {...register(name)}
           value={watch(name)}
           onChange={handleChange}
           {...rest}
@@ -51,8 +36,7 @@ const Control = ({
     case "daterangepicker":
       return (
         <Daterangepicker
-          ref={register}
-          name={name}
+          {...register(name)}
           value={watch(name)}
           onChange={handleChange}
           {...rest}
@@ -60,22 +44,27 @@ const Control = ({
       );
     case "daterangepicker2":
       return (
-        <Daterangepicker2
-          ref={register}
-          startName={startName}
-          endName={endName}
-          startDate={watch(startName)}
-          endDate={watch(endName)}
-          onChange={handleDaterangepickerChange}
-          {...rest}
+        <Controller
+          control={control}
+          name={name}
+          render={({ onBlur }) => (
+            <Daterangepicker2
+              onBlur={onBlur}
+              startName={startName}
+              endName={endName}
+              startDate={watch(startName)}
+              endDate={watch(endName)}
+              onChange={handleDaterangepickerChange}
+              {...rest}
+            />
+          )}
         />
       );
     default:
       return (
         <Input
           type={type}
-          ref={register}
-          name={name}
+          {...register(name)}
           onChange={handleChange}
           {...rest}
         />
@@ -84,12 +73,12 @@ const Control = ({
 };
 
 const Field = ({ name, ...rest }) => {
-  const { errors, register } = useFormContext();
+  const { errors } = useFormState();
   const error = errors?.[name]?.message;
 
   return (
     <>
-      <Control name={name} invalid={!!error} register={register} {...rest} />
+      <Control name={name} invalid={!!error} {...rest} />
       {error && <Feedback>{error}</Feedback>}
     </>
   );
