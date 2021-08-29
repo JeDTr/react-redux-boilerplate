@@ -1,25 +1,38 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFormState } from "react-hook-form";
 
 import Input from "../Input";
 
 import Feedback from "./Feedback";
 
-const Control = ({ type = "text", register, ...rest }) => {
+const Control = ({ type = "text", name, ...rest }) => {
+  const { register, setValue } = useFormContext();
+
+  const handleChange = (newValue) => {
+    setValue(name, newValue);
+  };
+
   switch (type) {
     default:
-      return <Input type={type} ref={register} {...rest} />;
+      return (
+        <Input
+          type={type}
+          {...register(name)}
+          onChange={handleChange}
+          {...rest}
+        />
+      );
   }
 };
 
 const Field = ({ name, ...rest }) => {
-  const { errors, register } = useFormContext();
+  const { errors } = useFormState();
   const error = errors?.[name]?.message;
 
   return (
     <>
-      <Control name={name} invalid={!!error} register={register} {...rest} />
-      {error && <Feedback>{error}</Feedback>}
+      <Control name={name} invalid={!!error} {...rest} />
+      {!!error && <Feedback>{error}</Feedback>}
     </>
   );
 };
