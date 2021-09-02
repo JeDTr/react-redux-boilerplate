@@ -1,7 +1,7 @@
 // original version: https://gist.github.com/Godofbrowser/bf118322301af3fc334437c683887c5f
 import axiosBase from "axios";
 
-// import { getTokens, setTokens } from "@/utils/auth";
+import { getTokens, setTokens } from "@/utils/auth";
 
 const axios = axiosBase.create({
   baseURL: "http://localhost:5000/api",
@@ -9,7 +9,7 @@ const axios = axiosBase.create({
   withCredentials: true,
 });
 
-// axios.defaults.headers.access_token = getTokens().access_token;
+axios.defaults.headers.access_token = getTokens().access_token;
 
 // for multiple requests
 // const isRefreshing = false;

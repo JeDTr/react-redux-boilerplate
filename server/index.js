@@ -37,11 +37,11 @@ const tokens = {
   access_token: "",
 };
 
-// const refreshTokens = () => {
-//   tokens.access_token = `access_token_${Date.now() + 10000}`;
+const generateTokens = () => {
+  tokens.access_token = `access_token_${Date.now() + 10000}`;
 
-//   return tokens;
-// };
+  return tokens;
+};
 
 const isTokenExpired = (token) => {
   return parseInt(token.split("_").pop()) < Date.now() - 10000;
@@ -55,9 +55,12 @@ const user = {
 // middleware
 const authenticate = (req, res, next) => {
   // parse cookies
-  const { access_token } = req.cookies;
+  // const { access_token } = req.header;
 
-  if (!access_token) {
+  if (
+    req.headers.access_token !== tokens.access_token ||
+    isTokenExpired(tokens.access_token)
+  ) {
     return res.status(401).send("unauthorized");
   }
   next();
@@ -67,25 +70,26 @@ server.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
   if (email !== user.email) {
-    return res
-      .status(404)
-
-      .json({ email: "email is not found" });
+    return res.status(404).json({ email: "email is not found" });
   }
 
   if (password !== user.password) {
     return res.status(400).json({ password: "password is incorrect" });
   }
 
+  const { access_token, refresh_token } = generateTokens();
+
   return res
-    .status(200)
-    .cookie("access_token", "ThongTheW", {
-      sameSite: "strict",
+    .cookie("refresh_token", refresh_token, {
+      sameSite: "none",
       path: "/",
-      expires: new Date(new Date().getTime() + 100 * 1000),
-      httpOnly: true,
+      secure: true,
+      expires: new Date(
+        new Date().getTime() + 10 * 365.25 * 24 * 60 * 60 * 1000,
+      ),
+      // httpOnly: true,
     })
-    .send("cookie being initialised");
+    .json({ access_token });
 });
 
 server.post("/api/logout", (req, res) => {
@@ -98,7 +102,7 @@ server.post("/api/logout", (req, res) => {
 //   const { refresh_token } = req.body;
 
 //   if (refresh_token === tokens.refresh_token) {
-//     return res.json(refreshTokens());
+//     return res.json(generateTokens());
 //   }
 
 //   return res.status(400).json({ message: "refresh_token is incorrect" });
@@ -106,6 +110,7 @@ server.post("/api/logout", (req, res) => {
 
 // Use default router
 server.use("/api", authenticate, router);
+
 server.listen(5000, () => {
   console.log("JSON Server is running");
 });
