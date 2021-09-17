@@ -5,10 +5,9 @@ import { handleActions } from "@/utils/redux-actions";
 import { getUserProfile, updateGlobalKey } from "./actions";
 
 const initialState = {
-  loading: false,
+  loading: true,
   error: false,
   currentUser: null,
-  key: Date.now(),
 };
 
 export default handleActions(

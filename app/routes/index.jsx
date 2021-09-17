@@ -6,20 +6,25 @@ import Loading from "@/components/Loading";
 import { getTokens } from "@/utils/auth";
 import { getUserProfile } from "@/redux/global/actions";
 
+import { loadingSelector } from "../redux/global/selectors";
+import { apiLoadingSelector } from "../redux/loading-middleware/selectors";
+
 import { ROUTES } from "./constants";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
-  const { loading, key } = useSelector((state) => state.global);
-  const { loading: apiLoading } = useSelector((state) => state.loading);
+  const loading = useSelector(loadingSelector);
+  const apiLoading = useSelector(apiLoadingSelector);
 
   useEffect(() => {
     const { access_token } = getTokens();
 
     if (access_token) {
       dispatch(getUserProfile.request());
+    } else {
+      dispatch(getUserProfile.failure());
     }
-  }, [key]);
+  }, []);
 
   // useEffect(() => {
   //   const handleStorageChange = (e) => {
@@ -31,7 +36,7 @@ const AppRoutes = () => {
   //   return () => window.removeEventListener("storage", handleStorageChange);
   // }, []);
 
-  if (loading) return "Loading...";
+  if (loading) return <Loading />;
 
   return (
     <Suspense fallback={<Loading />}>

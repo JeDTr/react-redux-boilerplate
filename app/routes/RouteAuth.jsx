@@ -17,4 +17,5 @@ const RouteAuth = ({ component: Component, ...rest }) => {
     </Route>
   );
 };
+
 export default RouteAuth;
