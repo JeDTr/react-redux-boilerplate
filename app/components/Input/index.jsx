@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 
 import * as S from "./styled";
 
@@ -10,4 +10,4 @@ const Input = ({ onChange, ...rest }, ref) => {
   return <S.Input onChange={handleChange} {...rest} ref={ref} />;
 };
 
-export default React.forwardRef(Input);
+export default forwardRef(Input);

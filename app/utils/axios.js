@@ -4,7 +4,7 @@ import axiosBase from "axios";
 import { getTokens, setTokens } from "@/utils/auth";
 
 const axios = axiosBase.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: process.env.REACT_APP_BASE_API_URL,
   timeout: 10000,
 });
 

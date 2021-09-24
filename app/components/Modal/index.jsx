@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ReactDOM from "@hot-loader/react-dom";
 
 import * as S from "./styled";

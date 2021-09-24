@@ -1,7 +1,6 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import { hot } from "react-hot-loader/root";
-import React from "react";
 import ReactDOM from "@hot-loader/react-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";

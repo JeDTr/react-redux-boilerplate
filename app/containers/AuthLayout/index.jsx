@@ -1,8 +1,6 @@
-import React from "react";
+import * as S from "./styled";
 
 import Sidebar from "@/components/Sidebar";
-
-import * as S from "./styled";
 
 const AuthLayout = ({ children }) => (
   <S.AuthLayout>

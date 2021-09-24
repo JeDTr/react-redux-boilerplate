@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useInjectSaga, useInjectReducer } from "redux-injectors";
 

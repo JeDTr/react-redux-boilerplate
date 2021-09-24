@@ -1,15 +1,15 @@
-import React, { Suspense, useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import Loading from "@/components/Loading";
-import { getTokens } from "@/utils/auth";
-import { getUserProfile } from "@/redux/global/actions";
 
 import { loadingSelector } from "../redux/global/selectors";
 import { apiLoadingSelector } from "../redux/loading-middleware/selectors";
 
 import { ROUTES } from "./constants";
+
+import Loading from "@/components/Loading";
+import { getTokens } from "@/utils/auth";
+import { getUserProfile } from "@/redux/global/actions";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();

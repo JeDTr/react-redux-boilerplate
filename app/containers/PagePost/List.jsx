@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { getPosts } from "./actions";
@@ -10,7 +10,7 @@ const List = () => {
     dispatch(getPosts.request());
   }, []);
 
-  return <div>Page Post List</div>;
+  return <div>Page Post Lists</div>;
 };
 
 export default List;
