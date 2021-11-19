@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useMatch } from "react-router-dom";
 
 import { ITEMS } from "./constants";
 import * as S from "./styled";
@@ -11,7 +11,7 @@ const ItemLink = ({ label, url }) => (
 );
 
 const ItemCollapse = ({ label, url, childs }) => {
-  const match = useRouteMatch(url);
+  const match = useMatch(url);
   const [collapse, setCollapse] = useState(!!match);
 
   return (

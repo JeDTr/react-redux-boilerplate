@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 
 import Form from "@/components/Form";
@@ -10,7 +10,7 @@ import AuthService from "@/services/api/auth-service";
 import * as S from "./styled";
 
 const Login = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate: login, isLoading, error } = useMutation((data) =>
     AuthService.login(data),
@@ -22,7 +22,7 @@ const Login = () => {
         setTokens(tokens);
         queryClient.setQueryData("tokens", tokens);
         await queryClient.refetchQueries(["profile"]);
-        history.push("/posts");
+        navigate("/posts");
       },
     });
   };

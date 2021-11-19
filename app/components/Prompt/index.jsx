@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { createBrowserHistory } from "history"
 import { useFormContext } from "react-hook-form";
 
 import Modal from "../Modal";
 import Button from "../Button";
 
+const history = createBrowserHistory();
+
 const Prompt = () => {
-  const history = useHistory();
 
   const [prompt, setPrompt] = useState(null);
 
@@ -28,31 +29,31 @@ const Prompt = () => {
     let unblock;
 
     if (isDirty) {
-      unblock = history.block((location) => {
-        setPrompt({ location, unblock });
-        return false;
+      unblock = history.block(({ location }) => {
+        // setPrompt({ location, unblock });
+        // return false;
       });
     }
 
     return unblock;
   }, [isDirty]);
 
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      const confirmationMessage = "o/";
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     const confirmationMessage = "o/";
 
-      // Gecko + IE
-      const event = e || window.event;
-      event.returnValue = confirmationMessage;
-      /* Safari, Chrome, and other
-       * WebKit-derived browsers */
-      return "";
-    };
+  //     // Gecko + IE
+  //     const event = e || window.event;
+  //     event.returnValue = confirmationMessage;
+  //     /* Safari, Chrome, and other
+  //      * WebKit-derived browsers */
+  //     return "";
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, []);
+  //   return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  // }, []);
 
   return (
     <Modal isOpen={!!prompt}>

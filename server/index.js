@@ -63,7 +63,7 @@ server.post("/api/login", (req, res) => {
 server.post("/api/logout", (req, res) => {
   tokens.access_token = ''
 
-  return res.json({ message: "logout success"})
+  return res.json({ message: "logout success" })
 })
 
 server.post("/api/refresh_token", (req, res) => {
@@ -73,7 +73,7 @@ server.post("/api/refresh_token", (req, res) => {
     return res.json(refreshTokens())
   }
 
-  return res.status(400).json({ message: 'refresh_token is incorrect'})
+  return res.status(400).json({ message: 'refresh_token is incorrect' })
 })
 
 // Use default router

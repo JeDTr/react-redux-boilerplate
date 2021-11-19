@@ -1,21 +1,19 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useQueryClient } from "react-query";
 
 import AuthLayout from "@/containers/layouts/AuthLayout";
 
-const RouteAuth = ({ component: Component, ...rest }) => {
+const RouteAuth = () => {
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData("profile");
 
-  if (!profile) return <Redirect to="/login" />;
+  if (!profile) return <Navigate to="/login" />;
 
   return (
-    <Route {...rest}>
-      <AuthLayout>
-        <Component />
-      </AuthLayout>
-    </Route>
+    <AuthLayout>
+      <Outlet />
+    </AuthLayout>
   );
 };
 export default RouteAuth;

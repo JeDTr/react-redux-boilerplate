@@ -21,6 +21,7 @@ const Create = () => {
         start2: "",
         end2: "",
       }}
+    // enableLeavingPrompt={false}
     >
       <Form.Group>
         <Form.Label htmlFor="title">Title</Form.Label>

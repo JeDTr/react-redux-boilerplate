@@ -1,14 +1,14 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useQueryClient } from "react-query";
 
-const RouteUnauth = (props) => {
+const RouteUnauth = () => {
   const queryClient = useQueryClient();
   const profile = queryClient.getQueryData("profile");
 
-  if (profile) return <Redirect to="/posts/create" />;
+  if (profile) return <Navigate to="/posts/create" />;
 
-  return <Route {...props} />;
+  return <Outlet />;
 };
 
 export default RouteUnauth;
