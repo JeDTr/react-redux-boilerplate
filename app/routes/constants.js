@@ -7,6 +7,7 @@ import RouteUnauth from "./RouteUnauth";
 const Home = lazy(() => import("@/containers/PageHome"));
 const Login = lazy(() => import("@/containers/PageLogin"));
 const Posts = lazy(() => import("@/containers/PagePost"));
+const Test = lazy(() => import("@/containers/PageTest"));
 
 export const ROUTES = [
   {
@@ -24,5 +25,10 @@ export const ROUTES = [
     path: "/posts",
     component: Posts,
     routeComponent: RouteAuth,
+  },
+  {
+    path: "/test",
+    component: Test,
+    routeComponent: RouteUnauth,
   },
 ];
